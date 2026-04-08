@@ -1,4 +1,4 @@
-const CACHE_NAME = 'chau-misil-v1';
+const CACHE_NAME = 'chau-misil-v2';
 
 // Esta es la lista de archivos que el celular guardará en su memoria
 
