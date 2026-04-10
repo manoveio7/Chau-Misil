@@ -1,26 +1,46 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <title>Chau Misil</title>
-<link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json">
 
-<script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js');
-    }
-</script>
-<style type="text/css">
-    * {
-        margin: 0;
-    }
-</style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log("SW registrado con éxito"))
+                .catch(err => console.error("Fallo al registrar SW", err));
+        }
+    </script>
+
+    <style type="text/css">
+        /* Esto elimina cualquier borde blanco o negro residual */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Evita que la pantalla se mueva de arriba a abajo */
+            background-color: #29abe2; /* El celeste de tu cielo */
+        }
+        canvas {
+            display: block; /* Quita el espacio pequeño que los navegadores dejan debajo de las imágenes */
+        }
+    </style>
 </head>
 <body>
-<script src="./js/phaser.min.js"></script>
-<script src="./js/entrada.js"></script>
-<script src="./js/main.js"></script>
-<script src="./js/inicio.js"></script>
+    <script src="./js/phaser.min.js"></script>
+    <script src="./js/entrada.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/inicio.js"></script>
 </body>
 </html>
