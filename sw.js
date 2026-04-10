@@ -76,35 +76,33 @@ const ASSETS = [
   './img/starVerde.png'
 ];
 
-// 1. Instalación: Guarda los archivos en el dispositivo
-self.addEventListener('install', (event) => {
+// Instalación
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('Instalando caché: ' + CACHE_NAME);
-      return cache.addAll(ASSETS).catch(err => {
-        console.error('Error cargando archivos a la caché:', err);
-      });
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('Cacheando archivos...');
+      return cache.addAll(ASSETS);
     })
   );
+  self.skipWaiting();
 });
 
-// 2. Activación: Limpia cachés antiguas si cambias el nombre (v1, v2...)
-self.addEventListener('activate', (event) => {
+// Activación (Borra cachés viejas)
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_NAME) {
-          return caches.delete(key);
-        }
-      }));
-    })
+    caches.keys().then(keys => Promise.all(
+      keys.map(key => {
+        if (key !== CACHE_NAME) return caches.delete(key);
+      })
+    ))
   );
+  self.clients.claim();
 });
 
-// 3. Estrategia: Cargar desde la memoria si no hay internet
-self.addEventListener('fetch', (event) => {
+// Respuesta Offline
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
+    caches.match(event.request).then(response => {
       return response || fetch(event.request);
     })
   );
