@@ -26,6 +26,12 @@ function lerp (start, end, amt)
 
 var config = {
 	type: Phaser.AUTO,
+	scale: {
+        mode: Phaser.Scale.ENVELOP, // 'ENVELOP' asegura que cubra TODA la pantalla sin dejar bordes
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 375,  // Mantén tus medidas originales
+        height: 667
+    },
 	width: window.innerWidth,
 	height: window.innerHeight,
 	
