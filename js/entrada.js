@@ -133,9 +133,9 @@ function inicio()
 	});
 	
 	play.on('pointerup',() =>{	
-		if (!this.scale.isFullscreen) 
+		/*if (!this.scale.isFullscreen) 
             this.scale.startFullscreen();
-        
+        */
 		this.tweens.add({
 			targets: cortina,
 			duration:500,
