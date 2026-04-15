@@ -28,13 +28,15 @@ var config = {
 	type: Phaser.AUTO,
 	width: window.innerWidth,
 	height: window.innerHeight,
-	
+	scale: {
+        // Ajusta el juego al tamaño de la ventana conservando la proporción
+        mode: Phaser.Scale.FIT, 
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
 	fps: {
 	target: 60,
 	forceSetTimeOut: true
 	},
-	
-	
 	physics: {
 		default: 'arcade',
 		arcade: {
