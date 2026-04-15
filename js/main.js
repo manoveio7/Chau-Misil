@@ -1006,6 +1006,9 @@ function mostrarAlertas(a, m)
 
 function funBtnDer(e)
 {
+	if (!this.scale.isFullscreen) 
+            this.scale.startFullscreen();
+        
 	//player.x = e.x;
 	//player.y = e.y;
 	if(!misionCumplida)
@@ -1014,6 +1017,8 @@ function funBtnDer(e)
 
 function funBtnIzq(e)
 {
+	if (!this.scale.isFullscreen) 
+            this.scale.startFullscreen();
 	//player.x = e.x;
 	//player.y = e.y;
 	if(!misionCumplida)
