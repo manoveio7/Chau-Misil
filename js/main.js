@@ -1346,7 +1346,7 @@ function empezarDetener(elemento)
     } else {
         // --- A PARTIR DEL NIVEL 4 ---
         objectivoEstrellas = m;
-        objetivoMisiles = m - 3; // En nivel 4 pide destruir 1, en nivel 5 pide 2...
+        objetivoMisiles = m - 2; // En nivel 4 pide destruir 1, en nivel 5 pide 2...
         vel = 3 + (m * 0.2);     // Velocidad estándar de juego
     }
 
