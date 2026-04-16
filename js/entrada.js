@@ -231,10 +231,10 @@ function animar(t, play)
 	targets: play,
 	duration:500,
 	alpha: 1,
-	scaleX: 0.38,
-	scaleY: 0.40,
+	scaleX: 0.6'//0.38,
+	scaleY: 0.6'//0.40,
 	repeat: -1,
-	ease: 'Sine.easeInOut',
+	ease: 'Bounce.easeOut',
 	yoyo: true,
 	onComplete: () =>{	
 		animar(t, play);
