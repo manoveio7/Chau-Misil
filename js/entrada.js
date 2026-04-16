@@ -185,7 +185,7 @@ panelReset.add([fondoReset, textoAviso, btnConfirmar, btnCancelar]);
 
 	});
 	
-	play.on('pointedown',() =>{	
+	play.on('pointerdown',() =>{	
 		if(CartelReset) return
 		/*if (!this.scale.isFullscreen) 
             this.scale.startFullscreen();
