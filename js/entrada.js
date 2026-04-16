@@ -229,7 +229,7 @@ function animar(t, play)
 {
 	t.tweens.add({
 	targets: play,
-	duration:500,
+	duration:1500,
 	alpha: 1,
 	scaleX: 0.6,//0.38,
 	scaleY: 0.6,//0.40,
