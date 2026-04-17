@@ -29,8 +29,8 @@ function inicio()
 	entr.displayHeight = window.innerHeight;
 	
 	let play = this.add.sprite(window.innerWidth / 2,window.innerHeight / 2,'play');
-	play.displayWidth = window.innerWidth/2.5;
-	play.displayHeight = window.innerWidth/2.5;
+	play.displayWidth = window.innerWidth/3.5;
+	play.displayHeight = window.innerWidth/3.5;
 	play.setInteractive();
 		
 	animar(this, play)
@@ -167,8 +167,8 @@ function animar(t, play)
 	targets: play,
 	duration:1500,
 	alpha: 1,
-	scaleX: 0.6,//0.38,
-	scaleY: 0.6,//0.40,
+	scaleX: 0.4,//0.38,
+	scaleY: 0.4,//0.40,
 	repeat: -1,
 	ease: 'Bounce.easeOut',
 	yoyo: true,
