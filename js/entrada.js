@@ -54,12 +54,12 @@ function inicio()
 	
 	//Borrar datos
 		let bw = innerWidth/5;
-		let btnBorar = this.add.sprite(window.innerWidth - bw,window.innerHeight / 1.1,'btnBorrar');
-	btnBorar.displayWidth = bw;
-	btnBorar.displayHeight = bw;
-	btnBorar.setInteractive();
+		let btnBorrar = this.add.sprite(window.innerWidth - bw,window.innerHeight / 1.1,'btnBorrar');
+	btnBorrar.displayWidth = bw;
+	btnBorrar.displayHeight = bw;
+	btnBorrar.setInteractive();
 	
-	btnBorar.on('pointerup',() =>{	
+	btnBorrar.on('pointerup',() =>{	
 		/*
 	// Al tocar el boton borrara los datos guardados
 		removerDatosGuardados('mision');
