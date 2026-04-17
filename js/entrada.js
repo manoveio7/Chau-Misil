@@ -16,74 +16,6 @@ function carga()
 	this.load.image('play', './img/play2.png');
 	this.load.image('blanco', './img/estrella.png');
 	this.load.image('btnBorrar', './img/btnBorrar.png');
-	
-/*	var progressBar = this.add.graphics();
-	var progressBox = this.add.graphics();
-	progressBox.fillStyle(0x998869, 0.8);
-	progressBox.fillRect(10, 270, 320, 50);
-	
-	var width = this.cameras.main.width;
-	var height = this.cameras.main.height;
-	var loadingText = this.make.text({
-		x: width / 2,
-		y: height / 2 - 35,
-		text: 'Cargando...',
-		style: {
-			font: '20px monospace',
-			fill: '#000000'
-		}
-	});
-	
-	loadingText.setOrigin(0.5, 0.5);
-	
-	var percentText = this.make.text({
-		x: width / 2,
-		y: height / 2 - 0,
-		text: '0%',
-		style: {
-			font: '18px monospace',
-			fill: '#ffffff'
-		}
-	});
-	
-	percentText.setOrigin(0.5, 0.5);
-	
-	var assetText = this.make.text({
-		x: width / 2,
-		y: height / 2 + 50,
-		text: '',
-		style: {
-			font: '18px monospace',
-			fill: '#ffffff'
-		}
-	});
-	
-	assetText.setOrigin(0.5, 0.5);
-	
-	this.load.on('progress', function (value) {
-		percentText.setText(parseInt(value * 100) + '%');
-		progressBar.clear();
-		progressBar.fillStyle(0xffffff , 1);
-		progressBar.fillRect(20, 280, 300 * value, 30);
-	});
-	
-	this.load.on('fileprogress', function (file) {
-		assetText.setText('Cargando Imagen: ' + file.key);
-	});
-	
-	this.load.on('complete', function () {
-		progressBar.destroy();
-		progressBox.destroy();
-		loadingText.destroy();
-		percentText.destroy();
-		assetText.destroy();
-	});
-	
-	this.load.image('play', './img/play2.png');
-	for (var i = 0; i < 50; i++) {
-		this.load.image('play'+i, './img/play2.png');
-	}
-*/
 }
 
 function inicio()
@@ -133,6 +65,7 @@ function inicio()
 		removerDatosGuardados('mision');
 		alert('Los datos fueron borrados\n Se reinicia el juego');
 	*/
+		btnBorrar.setVisible(false)
 	// --- CARTEL DE RESET DE DATOS ---
 	CartelReset = true;
 let panelReset = this.add.container(window.innerWidth / 2, window.innerHeight / 2);
@@ -178,6 +111,7 @@ let btnCancelar = this.add.text(0, 75, "Cancelar", {
 btnCancelar.on('pointerdown', () => {
     panelReset.setVisible(false);
 	CartelReset = false
+	btnBorrar.setVisible(true)
 });
 
 panelReset.add([fondoReset, textoAviso, btnConfirmar, btnCancelar]);
