@@ -1,0 +1,190 @@
+var entrada = {
+	key: 'entrada',
+	active: true,
+	preload: carga,
+	create: inicio
+};
+
+var cortina;
+var w;
+var h;
+var CartelReset;
+
+function carga()
+{
+	this.load.image('entrada', './img/entrada.png');
+	this.load.image('play', './img/play2.png');
+	this.load.image('blanco', './img/estrella.png');
+	this.load.image('btnBorrar', './img/btnBorrar.png');
+}
+
+function inicio()
+{
+	//consola.... 
+	//javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+	CartelReset = false;
+	
+	let entr = this.add.sprite(0,0,'entrada').setOrigin(0);
+	entr.displayWidth = window.innerWidth
+	entr.displayHeight = window.innerHeight;
+	
+	let play = this.add.sprite(window.innerWidth / 2,window.innerHeight / 2,'play');
+	play.displayWidth = window.innerWidth/2.5;
+	play.displayHeight = window.innerWidth/2.5;
+	play.setInteractive();
+		
+	animar(this, play)
+	
+	cortina = this.add.graphics();
+	cortina.fillStyle(0x000000,1);
+	cortina.fillRect(0,0,window.innerWidth, window.innerHeight);
+	cortina.setDepth(50);
+	//cortina.setAlpha(0);
+	
+	
+	this.tweens.add({
+		targets: cortina,
+		duration:500,
+		alpha: 0,
+		onComplete: () =>{
+		cortina.active = false;
+		//vel = 3
+		} 
+	});
+	
+	//Borrar datos
+		let bw = innerWidth/5;
+		let btnBorar = this.add.sprite(window.innerWidth - bw,window.innerHeight / 1.1,'btnBorrar');
+	btnBorar.displayWidth = bw;
+	btnBorar.displayHeight = bw;
+	btnBorar.setInteractive();
+	
+	btnBorar.on('pointerup',() =>{	
+		/*
+	// Al tocar el boton borrara los datos guardados
+		removerDatosGuardados('mision');
+		alert('Los datos fueron borrados\n Se reinicia el juego');
+	*/
+	// --- CARTEL DE RESET DE DATOS ---
+	CartelReset = true;
+	
+	btnBorar.setVisible(false)
+
+let panelReset = this.add.container(window.innerWidth / 2, window.innerHeight / 2);
+panelReset.setDepth(100).setScrollFactor(0).setVisible(true);
+
+// Fondo del cartel
+let fondoReset = this.add.graphics();
+fondoReset.fillStyle(0x000000, 0.9);
+fondoReset.fillRoundedRect(-150, -100, 300, 200, 15);
+fondoReset.lineStyle(2, 0xffffff, 1);
+fondoReset.strokeRoundedRect(-150, -100, 300, 200, 15);
+
+// Texto de advertencia
+let textoAviso = this.add.text(0, -50, "¡ATENCIÓN!\nSe borrará todo\nel progreso.", {
+    fontFamily: 'Arial',
+    fontSize: '20px',
+    color: '#ffffff',
+    align: 'center'
+}).setOrigin(0.5);
+
+// Botón Confirmar (Empezar Misión 1)
+let btnConfirmar = this.add.text(0, 30, "[ REINICIAR JUEGO ]", {
+    fontFamily: 'Arial',
+    fontSize: '18px',
+    color: '#ff0000',
+    backgroundColor: '#330000',
+    padding: { x: 10, y: 5 }
+}).setOrigin(0.5).setInteractive();
+
+btnConfirmar.on('pointerdown', () => {
+	CartelReset = false
+    localStorage.setItem('mision', 1); // Reset a misión 1
+    this.scene.restart(); // Reiniciar la escena
+});
+
+// Botón Cancelar
+let btnCancelar = this.add.text(0, 75, "Cancelar", {
+    fontFamily: 'Arial',
+    fontSize: '14px',
+    color: '#aaaaaa'
+}).setOrigin(0.5).setInteractive();
+
+btnCancelar.on('pointerdown', () => {
+    panelReset.setVisible(false);
+	CartelReset = false
+	btnBorar.setVisible(true)
+});
+
+panelReset.add([fondoReset, textoAviso, btnConfirmar, btnCancelar]);
+
+
+	});
+	
+	play.on('pointerdown',() =>{	
+		if(CartelReset) return
+		/*if (!this.scale.isFullscreen) 
+            this.scale.startFullscreen();
+        */
+		this.tweens.add({
+			targets: cortina,
+			duration:500,
+			alpha: 1,
+			onComplete: () =>{
+				this.scene.start('arranca');
+			} 
+		});
+	}) ;
+	
+	let particulas = this.add.particles('blanco');
+	pts = particulas.createEmitter({
+	
+	x: 120,//{min:20,max:200},
+	y: 230,
+	speedY: {min: 100,max:200},
+	speedX: {min:-100,max:140},
+	lifespan:  {min:300,max:2500},
+	rotate: {start: 0.1,end: 360},
+	quantity: 2,// {min:5,max:40},
+	//maxParticles: 50,
+	//frequency: 200,
+	//randomFrame: true,
+	//timeScale: 1.5, 
+	radial: false, 
+	scale: { start: 1, end: 0, ease: 'Sine.easeInOut' },
+	tint: 0xeee233,
+	alpha: { start: 1, end: 0 },
+	blendMode: 4 // 'ADD',
+	//emitZone: { type: 'edge', source: shape1, quantity: 400, yoyo: false }
+	});
+	
+	pts.stop(); 
+}
+
+function animar(t, play)
+{
+	t.tweens.add({
+	targets: play,
+	duration:1500,
+	alpha: 1,
+	scaleX: 0.6,//0.38,
+	scaleY: 0.6,//0.40,
+	repeat: -1,
+	ease: 'Bounce.easeOut',
+	yoyo: true,
+	onComplete: () =>{	
+		animar(t, play);
+	} 
+	});
+} 
+
+function randomXY(a)
+{
+	a = Phaser.Math.FloatBetween(0.4,0.5);
+	return a;
+} 
+
+function removerDatosGuardados(key)
+{
+	localStorage.removeItem(key);
+}
